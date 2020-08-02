@@ -1,1 +1,128 @@
+//AntFriendMove
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class AntFriendMove : MonoBehaviour
+{
+    public float time = 60.0f;
+    void Start()
+    {
+        List<float> agx = new List<float>();
+        List<float> agy = new List<float>();
+        agx.Add(90.0f);
+        agx.Add(-90.0f);
+        agy.Add(0.0f);
+        agy.Add(180.0f);
+        int id = Random.Range(0, 2);
+        if (id == 1)
+        {
+            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x - 1.1f, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        }
+        this.gameObject.transform.eulerAngles = new Vector3(agx[id], agy[id], 0.0f);
+        StartCoroutine(DestroySelf());
+    }
+
+    
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == "Worm" || col.tag == "Bark" || col.tag == "AntFriend")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
+    }
+}
+
+//BarkMove
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BarkMove : MonoBehaviour
+{
+    public float time = 60.0f;
+    void Start()
+    {
+        StartCoroutine(DestroySelf());
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Bark" || col.tag == "Worm" || col.tag == "Hole")
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
+    }
+
+}
+
+//HoleMove
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HoleMove : MonoBehaviour
+{
+    public float time = 60.0f;
+    void Start()
+    {
+        StartCoroutine(DestroySelf());
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Hole" || col.tag == "AntFriend")
+        {
+            Destroy(gameObject);
+        }
+    }
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
+    }
+}
+
+//WormMove
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WormMove : MonoBehaviour
+{
+    public float time = 60.0f;
+    void Start()
+    {
+        float x = Random.Range(0.0f, 360.0f);
+        this.gameObject.transform.eulerAngles = new Vector3(x, 90.0f, 90.0f);
+        StartCoroutine(DestroySelf());
+    }
+    
+ 
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == "Worm" || col.tag == "Hole")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
+    }
+}
