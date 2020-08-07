@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
     GameObject player; //개미
     GameObject breadEquipPoint;  //개미다리
 
+    public Rigidbody rb;
+
     Vector3 forceDirection;
 
     public bool isPlayerEnter; //개미와 빵이 접촉했는지 여부를 저장하는 변수
@@ -15,6 +17,7 @@ public class Item : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");  //플레이어를 찾음
         breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint"); //장착위치 오브젝트 불러오기
+        rb = GetComponent<Rigidbody>(); //빵의 리지드바디 가져오기
     }
 
     // Start is called before the first frame update
@@ -29,37 +32,40 @@ public class Item : MonoBehaviour
     void Update()
     {
 
-        while (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.K))
         {
             Debug.Log("K버튼이 눌린상태");
             transform.SetParent(breadEquipPoint.transform);
             transform.localPosition = Vector3.zero;
             transform.rotation = new Quaternion(0, -90, 270, 0);
-            if (Input.GetKeyUp(KeyCode.K))
-            {
-                transform.parent = null; //상속해제
 
-            }
+            
         }
-        
-
-        if (isPlayerEnter)
+        if (Input.GetKeyUp(KeyCode.K))
         {
-            Debug.Log("개미가 충분히 근접함");
+            transform.parent = null;                    //상속해제
+            //transform.parent = transform.parent.parent;  //상속해제 두번째 방법
+
+            rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
+            Debug.Log("중력 설정 완료");
+            rb.mass = 10;                               //빵의 질량 10으로 설정
         }
 
-        if (Input.GetKey(KeyCode.K) && isPlayerEnter)
-          //k키를 눌렀고 && isPlayerEnter가 true일때
-        {
 
-            transform.SetParent(breadEquipPoint.transform); //item의 부모를 breadEquipPoint로 바꾸고 그 위치로 item옮기기
-            Debug.Log(isPlayerEnter);
+   
+        /*
+         if (Input.GetKey(KeyCode.K) && isPlayerEnter)
+           //k키를 눌렀고 && isPlayerEnter가 true일때
+         {
 
-            //transform.localPosition = Vector3.zero; //로컬포지션을 0으로 초기화
-            //transform.rotation = new Quaternion(0, 0, 0, 0);
+             transform.SetParent(breadEquipPoint.transform); //item의 부모를 breadEquipPoint로 바꾸고 그 위치로 item옮기기
+             Debug.Log(isPlayerEnter);
 
-            isPlayerEnter = false;
-        }
+             //transform.localPosition = Vector3.zero; //로컬포지션을 0으로 초기화
+             //transform.rotation = new Quaternion(0, 0, 0, 0);
+
+             isPlayerEnter = false;
+         }*/
 
     }
 
@@ -80,3 +86,4 @@ public class Item : MonoBehaviour
         }
     }
 }
+
