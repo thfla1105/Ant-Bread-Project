@@ -21,7 +21,7 @@ public class CameraControl : MonoBehaviour
     public float distance = 10.0f;
     [Tooltip("The height we want the camera to be above the target")]
     public float height = 5.0f;
-    public float rotation = 5.0f;
+    public float rotation = 60.0f;
 
     public float heightDamping = 2.0f;
     public float rotationDamping = 3.0f;
