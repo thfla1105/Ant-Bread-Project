@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -425,13 +425,20 @@ public class antmove : MonoBehaviour
             }
             btn[2, 1] = 0;
             btn[3, 1] = 0;
-
+            pre_move = 0;
             
         }
         else if(num>=2)  //btn[2, 1] == 0 && btn[3, 1] == 0)
         {
             horizontalAxis = 0f;
             transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
+        }
+
+        if (transform.position.y < 0)
+        {
+            
+            transform.position = new Vector3((float)-11.95, 0, (float)5.24);
+           
         }
 
         //this.inputBackwardRout = null;
