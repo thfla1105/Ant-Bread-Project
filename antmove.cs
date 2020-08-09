@@ -10,7 +10,8 @@ public class antmove : MonoBehaviour
    // private Coroutine inputBtnRoutine;
     private Coroutine inputForwardRout;
     //private Coroutine inputBackwardRout;
-    private float inputLate = 0.05f;
+    private float inputLate = 0.03f;
+    
 
     int[,] btn = new int[6, 2];
     int pre_move = 0;
@@ -153,8 +154,10 @@ public class antmove : MonoBehaviour
             t -= Time.deltaTime;
             yield return null;
         }
-     
-        float p = this.inputLate;
+
+
+        float p = 0.001f;
+        //float p = this.inputLate;
 
         while (p > 0)
         {
@@ -438,7 +441,10 @@ public class antmove : MonoBehaviour
         {
             
             transform.position = new Vector3((float)-11.95, 0, (float)5.24);
-           
+            btn[2, 1] = 0;
+            btn[3, 1] = 0;
+            pre_move = 0;
+
         }
 
         //this.inputBackwardRout = null;
