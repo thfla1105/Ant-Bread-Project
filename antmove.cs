@@ -32,8 +32,22 @@ public class antmove : MonoBehaviour
     float horizontalAxis;
     float rotationalAxis;
 
-
-
+    //식빵과 개미 충돌여부검사
+    public int chk = 0;
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == "Bread")
+        {
+            chk = 1;
+        }
+    }
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Bread")
+        {
+            chk = 0;
+        }
+    }
 
 
     void Awake()
