@@ -6,18 +6,18 @@ using System.Collections.Generic;
 public class antmove : MonoBehaviour
 {
 
-    private Coroutine inputKeyRoutine;
-    private Coroutine inputBtnRoutine;
+
+   // private Coroutine inputBtnRoutine;
     private Coroutine inputForwardRout;
-    private Coroutine inputBackwardRout;
-    private float inputLate = 0.03f;
+    //private Coroutine inputBackwardRout;
+    private float inputLate = 0.05f;
 
     int[,] btn = new int[6, 2];
     int pre_move = 0;
 
-   
+
     [Header("Speed")]
-    public float speedMovement = 0.3f;
+    public float speedMovement = 0.5f;
     public float speedRotation = 30f;
     public float speedAnimation = 3f;
 
@@ -31,14 +31,13 @@ public class antmove : MonoBehaviour
     float horizontalAxis;
     float rotationalAxis;
 
-    Rigidbody rigidbody3D;
+
 
 
 
     void Awake()
     {
 
-        rigidbody3D = GetComponent<Rigidbody>();
 
 
     }
@@ -48,10 +47,11 @@ public class antmove : MonoBehaviour
     {
         //StartCoroutine(this.StartButton());
         StartCoroutine(this.BtnState());
+        
         StartCoroutine(this.Forward());
         StartCoroutine(this.FallDown());
         AxesUpdate();
-        
+
 
     }
 
@@ -60,7 +60,7 @@ public class antmove : MonoBehaviour
         // verticalAxis = Input.GetAxis("Horizontal");
         // horizontalAxis = Input.GetAxis("Vertical");
 
-        
+
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -80,7 +80,7 @@ public class antmove : MonoBehaviour
     }
 
 
-   
+
 
     private IEnumerator BtnState()
     {
@@ -153,8 +153,7 @@ public class antmove : MonoBehaviour
             t -= Time.deltaTime;
             yield return null;
         }
-
-
+     
         float p = this.inputLate;
 
         while (p > 0)
@@ -244,19 +243,15 @@ public class antmove : MonoBehaviour
         }
 
 
-        this.inputBtnRoutine = null;
+        yield return null;
 
     }
 
 
     private IEnumerator Forward()
     {
-        while (true) {
-            if (this.inputBackwardRout == null)
-            {
-                this.inputBackwardRout = StartCoroutine(this.FallDown());
-            }
-
+        while (true)
+        {
             if (btn[2, 0] == 1 && btn[3, 0] == 1)
             {
                 if (btn[0, 0] == 1 && btn[0, 1] == 0)
@@ -318,12 +313,11 @@ public class antmove : MonoBehaviour
                 {
                     btn[2, 1] = btn[3, 1] + 2;
                     Debug.Log("d->" + btn[2, 1]);
-                    
+
                 }
             }
             yield return null;
         }
-        
 
         }
     
@@ -372,10 +366,12 @@ public class antmove : MonoBehaviour
         {
             if (pre_move != (btn[2, 1] - btn[3, 1]))
             {
-                Debug.Log("forward!!"+pre_move);
-                horizontalAxis =10f;
-                transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
-                pre_move = btn[2, 1] - btn[3, 1];
+               
+                    Debug.Log("forward!!" + pre_move);
+                    horizontalAxis = 5f;
+                    transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
+                    pre_move = btn[2, 1] - btn[3, 1];
+               
                 
             }
         }
@@ -393,18 +389,19 @@ public class antmove : MonoBehaviour
 
     private IEnumerator FallDown()
     {
-        float w = this.inputLate;
-        
+        float w = 0.01f;
+
         int num = 0;
 
         while (w > 0)
         {
-            
+              
                 for (int i = 0; i < 6; i++)
                 {
                     if (btn[i, 0] == 1)
                     {
                         num++;
+                    Debug.Log("num:" + num);
                     }
                 }
 
@@ -413,29 +410,32 @@ public class antmove : MonoBehaviour
             yield return null;
         }
 
-        if ((btn[2, 1] != 0 || btn[3, 1] != 0)&&num < 2)
+        if (transform.position.y>0&&num< 2)
         {
             Debug.Log("falling down");
-            float time = 3f;
+            float time = 1f;
             while (time > 0)
             {
-                horizontalAxis = -1f;
-                transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
-                time -= Time.deltaTime;
+                ///개미 떨어지는 위치 조절
+               
+                    horizontalAxis = -0.05f;
+                    transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
+                    time -= Time.deltaTime;
+                          
             }
             btn[2, 1] = 0;
             btn[3, 1] = 0;
 
             
         }
-        else if(btn[2, 1] == 0 && btn[3, 1] == 0)
+        else if(num>=2)  //btn[2, 1] == 0 && btn[3, 1] == 0)
         {
             horizontalAxis = 0f;
             transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
         }
 
-        this.inputBackwardRout = null;
-
+        //this.inputBackwardRout = null;
+        yield return null;
     }
 
 
