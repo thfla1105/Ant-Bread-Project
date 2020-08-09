@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class AntFriendMove : MonoBehaviour
 {
+    AntMove Ant;
     public float time = 60.0f;
+
     void Start()
     {
+        Ant = GameObject.Find("ant").GetComponent<AntMove>();
         List<float> agx = new List<float>();
         List<float> agy = new List<float>();
         agx.Add(90.0f);
@@ -20,10 +23,17 @@ public class AntFriendMove : MonoBehaviour
             this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x - 1.1f, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
         }
         this.gameObject.transform.eulerAngles = new Vector3(agx[id], agy[id], 0.0f);
-        StartCoroutine(DestroySelf());
+        //StartCoroutine(DestroySelf());
     }
 
-    
+    void Update()
+    {
+        if (Ant.chk == 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "Worm" || col.tag == "Bark" || col.tag == "AntFriend")
@@ -36,8 +46,9 @@ public class AntFriendMove : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
-    }
+    } 
 }
+
 
 //BarkMove
 using System.Collections;
@@ -46,19 +57,30 @@ using UnityEngine;
 
 public class BarkMove : MonoBehaviour
 {
+    AntMove Ant;
     public float time = 60.0f;
+
     void Start()
     {
-        StartCoroutine(DestroySelf());
+        Ant = GameObject.Find("ant").GetComponent<AntMove>();
+        //StartCoroutine(DestroySelf());
     }
 
-    void OnTriggerEnter(Collider col)
+    // Update is called once per frame
+    void Update()
+    { 
+        if (Ant.chk == 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerStay(Collider col)
     {
         if (col.tag == "Bark" || col.tag == "Worm" || col.tag == "Hole")
         {
             Destroy(gameObject);
         }
-        
     }
 
     IEnumerator DestroySelf()
@@ -66,8 +88,8 @@ public class BarkMove : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }
-
 }
+
 
 //HoleMove
 using System.Collections;
@@ -76,13 +98,23 @@ using UnityEngine;
 
 public class HoleMove : MonoBehaviour
 {
+    AntMove Ant;
     public float time = 60.0f;
     void Start()
     {
-        StartCoroutine(DestroySelf());
+        Ant = GameObject.Find("ant").GetComponent<AntMove>();
+        //StartCoroutine(DestroySelf());
     }
 
-    void OnTriggerEnter(Collider col)
+    // Update is called once per frame
+    void Update()
+    {
+        if (Ant.chk == 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+    void OnTriggerStay(Collider col)
     {
         if (col.tag == "Hole" || col.tag == "AntFriend")
         {
@@ -96,6 +128,7 @@ public class HoleMove : MonoBehaviour
     }
 }
 
+
 //WormMove
 using System.Collections;
 using System.Collections.Generic;
@@ -103,15 +136,24 @@ using UnityEngine;
 
 public class WormMove : MonoBehaviour
 {
+    AntMove Ant;
     public float time = 60.0f;
     void Start()
     {
+        Ant = GameObject.Find("ant").GetComponent<AntMove>();
         float x = Random.Range(0.0f, 360.0f);
         this.gameObject.transform.eulerAngles = new Vector3(x, 90.0f, 90.0f);
-        StartCoroutine(DestroySelf());
+       // StartCoroutine(DestroySelf());
     }
-    
- 
+
+    void Update()
+    {
+        if (Ant.chk == 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "Worm" || col.tag == "Hole")
@@ -126,3 +168,4 @@ public class WormMove : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
+
