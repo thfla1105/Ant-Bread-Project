@@ -156,8 +156,8 @@ public class antmove : MonoBehaviour
         }
 
 
-        float p = 0.001f;
-        //float p = this.inputLate;
+        
+        float p = this.inputLate;
 
         while (p > 0)
         {
