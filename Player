@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    public static bool isPlayerEnter; //개미와 빵이 접촉했는지 여부를 저장하는 변수
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
+
+    }
+
+
+    void Move()
+    {
+        Vector3 vec = new Vector3(
+           Input.GetAxis("Vertical"),
+           0,
+           0
+       );
+        transform.Translate(vec);
+    }
+
+    void OnTriggerEnter(Collider other) //isTrigger체크했으므로 onTrigger함수 사용
+    { //충돌감지는 되지만 물리적 충돌은 일어나지 않음
+        if (other.tag == "Bread")
+        {
+            Debug.Log("접촉함!");
+            isPlayerEnter = true;
+            Debug.Log("isPlayerEnter = true");
+
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Bread")
+        {
+            Debug.Log("떨어짐!");
+            isPlayerEnter = false;
+            Debug.Log("isPlayerEnter = false");
+
+        }
+    }
+}
+
