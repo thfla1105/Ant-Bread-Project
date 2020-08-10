@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//그라운드에 빵이 닿으면 삭제되는 것 구현
+//나무 밑 나무밑바닥 땅에 적용하는 스크립트
+//빵의 태그 = "Bread"
+public class DestroyBread : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bread") //빵이 그라운드에 닿으면
+            Destroy(other.gameObject); //닿은 빵을 제거
+    }
+}
