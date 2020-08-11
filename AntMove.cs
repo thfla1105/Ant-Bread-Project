@@ -30,7 +30,6 @@ public class AntMove : MonoBehaviour
     float horizontalAxis;
     float rotationalAxis;
 
-    ObstacleTrigger ot;
     public int chk = 0;
     void OnTriggerEnter(Collider col)
     {
