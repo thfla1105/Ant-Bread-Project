@@ -58,7 +58,7 @@ public class AntMove : MonoBehaviour
 
     void Awake()
     {
-        ot = gameObject.GetComponent<ObstacleTrigger>();
+    
     }
 
 
