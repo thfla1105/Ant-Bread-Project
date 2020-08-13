@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -58,7 +58,7 @@ public class AntMove : MonoBehaviour
 
     void Awake()
     {
-    
+        
     }
 
 
@@ -170,16 +170,7 @@ public class AntMove : MonoBehaviour
                 }
                 Debug.Log(array);
             }
-            t -= Time.deltaTime;
-            yield return null;
-        }
 
-
-
-        float p = this.inputLate;
-
-        while (p > 0)
-        {
             if (Input.GetKey(KeyCode.L))
             {
                 btn[5, 0] = 1;
@@ -191,6 +182,17 @@ public class AntMove : MonoBehaviour
                 Debug.Log(array);
             }
 
+            t -= Time.deltaTime;
+            yield return null;
+        }
+
+
+
+        float p = this.inputLate;
+
+        while (p > 0)
+        {
+            
 
             if (Input.GetKeyUp(KeyCode.A))
             {
@@ -347,44 +349,63 @@ public class AntMove : MonoBehaviour
     {
         float o = this.inputLate;
         bool h = false;
+        int backleg = 0;
         while (o > 0)
         {
+            
             if (btn[0, 1] == 1)
             {
+                
                 if (Input.GetKeyUp(KeyCode.A))
                 {
                     h = true;
                     btn[0, 1] = 0;
+                    
                 }
             }
             if (btn[1, 1] == 1)
             {
+                
                 if (Input.GetKeyUp(KeyCode.S))
                 {
                     h = true;
                     btn[1, 1] = 0;
+                    
                 }
             }
             if (btn[4, 1] == 1)
             {
+                
                 if (Input.GetKeyUp(KeyCode.K))
                 {
                     h = true;
                     btn[4, 1] = 0;
+                    
                 }
             }
             if (btn[5, 1] == 1)
             {
+               
                 if (Input.GetKeyUp(KeyCode.L))
                 {
                     h = true;
                     btn[5, 1] = 0;
+                    
+                }
+            }
+            int[] back = new int[4] { 0, 1, 4, 5 };
+            
+            foreach(int i in back)
+            {
+                if (btn[i, 0] == 1)
+                {
+                    backleg++;
                 }
             }
             o -= Time.deltaTime;
             yield return null;
         }
-        if (h == true)
+        if (h == true&&backleg==0)
         {
             if (pre_move != (btn[2, 1] - btn[3, 1]))
             {
