@@ -110,7 +110,7 @@ public class AntMove : MonoBehaviour
         while (t > 0)
         {
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 btn[0, 0] = 1;
                 string array = "";
@@ -122,7 +122,7 @@ public class AntMove : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 btn[1, 0] = 1;
                 string array = "";
@@ -134,7 +134,7 @@ public class AntMove : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 btn[2, 0] = 1;
                 string array = "";
@@ -147,7 +147,7 @@ public class AntMove : MonoBehaviour
 
 
 
-            if (Input.GetKey(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 btn[3, 0] = 1;
                 string array = "";
@@ -160,7 +160,7 @@ public class AntMove : MonoBehaviour
 
 
 
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 btn[4, 0] = 1;
                 string array = "";
@@ -171,7 +171,7 @@ public class AntMove : MonoBehaviour
                 Debug.Log(array);
             }
 
-            if (Input.GetKey(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 btn[5, 0] = 1;
                 string array = "";
@@ -407,7 +407,7 @@ public class AntMove : MonoBehaviour
         }
         if (h == true&&backleg==0)
         {
-            if (pre_move != (btn[2, 1] - btn[3, 1]))
+            if (pre_move != (btn[2, 1] - btn[3, 1])&&transform.position.y<=38)
             {
 
                 Debug.Log("forward!!" + pre_move);
@@ -417,6 +417,10 @@ public class AntMove : MonoBehaviour
 
 
             }
+        }
+        else if (transform.position.y > 38)
+        {
+            Debug.Log("Cant move!");
         }
         else
         {
