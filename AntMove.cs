@@ -11,7 +11,7 @@ public class AntMove : MonoBehaviour
     private float inputLate = 0.03f;
 
 
-    int[,] btn = new int[6, 2];
+    public int[,] btn = new int[6, 2];
     int pre_move = 0;
 
 
@@ -58,7 +58,7 @@ public class AntMove : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
 
 
@@ -192,7 +192,7 @@ public class AntMove : MonoBehaviour
 
         while (p > 0)
         {
-            
+
 
             if (Input.GetKeyUp(KeyCode.A))
             {
@@ -352,50 +352,50 @@ public class AntMove : MonoBehaviour
         int backleg = 0;
         while (o > 0)
         {
-            
+
             if (btn[0, 1] == 1)
             {
-                
+
                 if (Input.GetKeyUp(KeyCode.A))
                 {
                     h = true;
                     btn[0, 1] = 0;
-                    
+
                 }
             }
             if (btn[1, 1] == 1)
             {
-                
+
                 if (Input.GetKeyUp(KeyCode.S))
                 {
                     h = true;
                     btn[1, 1] = 0;
-                    
+
                 }
             }
             if (btn[4, 1] == 1)
             {
-                
+
                 if (Input.GetKeyUp(KeyCode.K))
                 {
                     h = true;
                     btn[4, 1] = 0;
-                    
+
                 }
             }
             if (btn[5, 1] == 1)
             {
-               
+
                 if (Input.GetKeyUp(KeyCode.L))
                 {
                     h = true;
                     btn[5, 1] = 0;
-                    
+
                 }
             }
             int[] back = new int[4] { 0, 1, 4, 5 };
-            
-            foreach(int i in back)
+
+            foreach (int i in back)
             {
                 if (btn[i, 0] == 1)
                 {
@@ -405,9 +405,9 @@ public class AntMove : MonoBehaviour
             o -= Time.deltaTime;
             yield return null;
         }
-        if (h == true&&backleg==0)
+        if (h == true && backleg == 0)
         {
-            if (pre_move != (btn[2, 1] - btn[3, 1])&&transform.position.y<=38)
+            if (pre_move != (btn[2, 1] - btn[3, 1]) && transform.position.y <= 38)
             {
 
                 Debug.Log("forward!!" + pre_move);
