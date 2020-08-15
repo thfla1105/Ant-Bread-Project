@@ -24,4 +24,14 @@ public class ObstacleTg_S : MonoBehaviour
             antmove.btn[1, 0] = 0;
         }
     }
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Bark" || col.tag == "Worm" || col.tag == "Hole" || col.tag == "AntFriend")
+        {
+            if (Input.GetKey(KeyCode.S))
+            {
+                antmove.btn[1, 0] = 1;
+            }
+        }
+    }
 }
