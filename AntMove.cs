@@ -325,7 +325,8 @@ public class AntMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.J))
                 {
-                    btn[3, 1] = btn[2, 1] + 2;
+                    btn[3, 1] = 2;
+                    btn[2, 1] = 0;
                     Debug.Log("j->" + btn[3, 1]);
                 }
             }
@@ -335,7 +336,8 @@ public class AntMove : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    btn[2, 1] = btn[3, 1] + 2;
+                    btn[2, 1] = 2;
+                    btn[3, 1] = 0;
                     Debug.Log("d->" + btn[2, 1]);
 
                 }
@@ -460,6 +462,9 @@ public class AntMove : MonoBehaviour
         if (transform.position.y > 0 && num < 2)
         {
             Debug.Log("falling down");
+            btn[2, 1] = 0;
+            btn[3, 1] = 0;
+            pre_move = 0;
             float time = 1f;
             while (time > 0)
             {
@@ -468,11 +473,12 @@ public class AntMove : MonoBehaviour
                 horizontalAxis = -0.05f;
                 transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
                 time -= Time.deltaTime;
+                
 
             }
-            btn[2, 1] = 0;
+            /*btn[2, 1] = 0;
             btn[3, 1] = 0;
-            pre_move = 0;
+            pre_move = 0;*/
 
         }
         else if (num >= 2)  //btn[2, 1] == 0 && btn[3, 1] == 0)
@@ -491,7 +497,7 @@ public class AntMove : MonoBehaviour
 
         }
 
-        //this.inputBackwardRout = null;
+        
         yield return null;
     }
 
