@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //스위치문으로 바꾸기
+       
         if (Input.GetKeyDown(KeyCode.A))
         {
             breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_A").GetComponent<Transform>();
@@ -66,31 +66,31 @@ public class Item : MonoBehaviour
                 Debug.Log("A키 떨어짐");
                 this.transform.parent = null;                    //상속해제
                 this.rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
-                this.rb.mass = 100;                               //빵의 질량 10으로 설정 
+                this.rb.mass = 100;                               //빵의 질량 100으로 설정 
             }
             else if ((i == 1) && !(Player.isParent_S))
             {
                 Debug.Log("S키 떨어짐");
 
-                this.transform.parent = null;                    //상속해제
-                this.rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
-                this.rb.mass = 100;                               //빵의 질량 10으로 설정 
+                this.transform.parent = null;                   
+                this.rb.useGravity = true;                
+                this.rb.mass = 100;                             
             }
             else if ((i == 2) && !(Player.isParent_K))
             {
                 Debug.Log("K키 떨어짐");
 
-                this.transform.parent = null;                    //상속해제
-                this.rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
-                this.rb.mass = 100;                               //빵의 질량 10으로 설정 
+                this.transform.parent = null;                 
+                this.rb.useGravity = true;                
+                this.rb.mass = 100;                         
             }
             else if ((i == 3) && !(Player.isParent_L))
             {
                 Debug.Log("L키 떨어짐");
 
-                this.transform.parent = null;                    //상속해제
-                this.rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
-                this.rb.mass = 100;                               //빵의 질량 10으로 설정 
+                this.transform.parent = null;                    
+                this.rb.useGravity = true;                
+                this.rb.mass = 100;                               
             }
 
         }
