@@ -19,7 +19,7 @@ public class TutorialMove : MonoBehaviour
         float height = tr.position.y;
         if(height >= -1.0f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
