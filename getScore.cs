@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +45,11 @@ public class getScore : MonoBehaviour
             transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f);
             isAntUpSideDown++;
 
+            Player.isParent_A = false;
+            Player.isParent_S = false;
+            Player.isParent_K = false;
+            Player.isParent_L = false;
+
             for (int i = 0; i < 4; i++)
             {
                 if (GameObject.Find("ant").GetComponent<Player>().breadCount[i] == true)
@@ -56,7 +61,7 @@ public class getScore : MonoBehaviour
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space) && player.isPlayerEnter) //식빵 닿았을 때 //개미가 정방향일 때 -> 역방향
+        else if (Input.GetKeyDown(KeyCode.Space) && player.isPlayerEnter && isAntUpSideDown % 2 == 0) //식빵 닿았을 때 //개미가 정방향일 때 -> 역방향
         {
             transform.eulerAngles = new Vector3(0.0f, 270.0f, 270.0f);
             isAntUpSideDown++;
