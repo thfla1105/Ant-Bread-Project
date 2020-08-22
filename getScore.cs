@@ -40,7 +40,7 @@ public class getScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && goalCollide)   //누르는 동안 hold //바닥에 닿았을 때 //개미가 역방향일 때 -> 정방향
+        if (Input.GetKeyDown(KeyCode.Space) && goalCollide && isAntUpSideDown % 2 == 1)   //누르는 동안 hold //바닥에 닿았을 때 //개미가 역방향일 때 -> 정방향
         {
             transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f);
             isAntUpSideDown++;
