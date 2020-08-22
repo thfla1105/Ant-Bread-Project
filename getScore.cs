@@ -42,6 +42,8 @@ public class getScore : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && goalCollide && isAntUpSideDown % 2 == 1)   //누르는 동안 hold //바닥에 닿았을 때 //개미가 역방향일 때 -> 정방향
         {
+            GameObject.Find("Canvas").GetComponent<PopupLoad>().chkSpace = false;
+        
             Player.isParent_A = false;
             Player.isParent_S = false;
             Player.isParent_K = false;
