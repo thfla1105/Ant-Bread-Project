@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     public static bool start = false;
 
+    public static bool[] breadCount = { false, false, false, false }; //a s k l
 
     public static bool isParent_A;
     public static bool isParent_S;
@@ -37,18 +38,17 @@ public class Player : MonoBehaviour
         tr_K = GameObject.FindGameObjectWithTag("EquipPoint_K").GetComponent<Transform>();
         tr_L = GameObject.FindGameObjectWithTag("EquipPoint_L").GetComponent<Transform>();
 
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-
         StartCoroutine(KeyDown_A());
         StartCoroutine(KeyDown_S());
         StartCoroutine(KeyDown_K());
         StartCoroutine(KeyDown_L());
+       
     }
 
 
@@ -61,19 +61,25 @@ public class Player : MonoBehaviour
 
         while (y > 0)
         {
-            if (Input.GetKeyDown(KeyCode.A) && isPlayerEnter)
+            //A키 눌리고 && 식빵이랑 충돌했고 && 개미가 정방향일때
+            if (Input.GetKeyDown(KeyCode.A) && isPlayerEnter && (getScore.isAntUpSideDown%2==0))
             {
                 isParent_A = true;
                 start = true;
                 vec = new Vector3(tr_A.position.x + 0.8f, tr_A.position.y, tr_A.position.z - 0.05f);
+                GameObject.FindGameObjectWithTag("EquipPoint_A").GetComponent<LeftLeg_A>().enabled = false;
+                tr_A.localRotation = Quaternion.Euler(-90.00001f, 0, -180);
+
                 Instantiate(prefabBread, vec, Quaternion.identity); //빵생성
 
-
+                breadCount[0] = true;
             }
 
             if (Input.GetKeyUp(KeyCode.A))
             {
                 isParent_A = false;
+                GameObject.FindGameObjectWithTag("EquipPoint_A").GetComponent<LeftLeg_A>().enabled = true;
+                breadCount[0] = false;
 
             }
 
@@ -81,11 +87,7 @@ public class Player : MonoBehaviour
             {
                 antmove.btn[0, 0] = 0;
             }
-            else if (!(isParent_A))
-            {
-                antmove.btn[0, 0] = 1;
 
-            }
             y -= Time.deltaTime;
             yield return null;
         }
@@ -99,31 +101,31 @@ public class Player : MonoBehaviour
 
         while (y > 0)
         {
-            if (Input.GetKeyDown(KeyCode.S) && isPlayerEnter)
+            if (Input.GetKeyDown(KeyCode.S) && isPlayerEnter && (getScore.isAntUpSideDown % 2 == 0))
             {
                 isParent_S = true;
                 start = true;
                 vec = new Vector3(tr_S.position.x + 0.8f, tr_S.position.y, tr_S.position.z - 0.05f);
-                Instantiate(prefabBread, vec, Quaternion.identity);
+                GameObject.FindGameObjectWithTag("EquipPoint_S").GetComponent<LeftLeg_S>().enabled = false;
+                tr_S.localRotation = Quaternion.Euler(-90.00001f, 0, -180);
 
+                Instantiate(prefabBread, vec, Quaternion.identity);
+                breadCount[1] = true;
 
             }
 
             if (Input.GetKeyUp(KeyCode.S))
             {
                 isParent_S = false;
-
+                GameObject.FindGameObjectWithTag("EquipPoint_S").GetComponent<LeftLeg_S>().enabled = true;
+                breadCount[1] = false;
 
             }
             if (isParent_S)
             {
                 antmove.btn[1, 0] = 0;
             }
-            else if (!(isParent_S))
-            {
-                antmove.btn[1, 0] = 1;
 
-            }
 
             y -= Time.deltaTime;
             yield return null;
@@ -138,32 +140,31 @@ public class Player : MonoBehaviour
 
         while (y > 0)
         {
-            if (Input.GetKeyDown(KeyCode.K) && isPlayerEnter)
+            if (Input.GetKeyDown(KeyCode.K) && isPlayerEnter && (getScore.isAntUpSideDown % 2 == 0))
             {
                 isParent_K = true;
                 start = true;
                 vec = new Vector3(tr_K.position.x - 0.8f, tr_K.position.y, tr_K.position.z - 0.05f);
+                GameObject.FindGameObjectWithTag("EquipPoint_K").GetComponent<RightLeg_K>().enabled= false;
+                tr_K.localRotation = Quaternion.Euler(-89.98f, 0, 0);
+
                 Instantiate(prefabBread, vec, Quaternion.identity);
 
-
+                breadCount[2] = true;
             }
 
             if (Input.GetKeyUp(KeyCode.K))
             {
                 isParent_K = false;
-
-
+                GameObject.FindGameObjectWithTag("EquipPoint_K").GetComponent<RightLeg_K>().enabled = true;
+                breadCount[2] = false;
 
             }
             if (isParent_K)
             {
                 antmove.btn[4, 0] = 0;
             }
-            else if (!(isParent_K))
-            {
-                antmove.btn[4, 0] = 1;
 
-            }
 
             y -= Time.deltaTime;
             yield return null;
@@ -178,31 +179,31 @@ public class Player : MonoBehaviour
 
         while (y > 0)
         {
-            if (Input.GetKeyDown(KeyCode.L) && isPlayerEnter)
+            if (Input.GetKeyDown(KeyCode.L) && isPlayerEnter && (getScore.isAntUpSideDown % 2 == 0))
             {
                 isParent_L = true;
                 start = true;
                 vec = new Vector3(tr_L.position.x - 0.8f, tr_L.position.y, tr_L.position.z - 0.05f);
-                Instantiate(prefabBread, vec, Quaternion.identity);
+                GameObject.FindGameObjectWithTag("EquipPoint_L").GetComponent<RightLeg_L>().enabled = false;
+                tr_L.localRotation = Quaternion.Euler(-89.98f, 0, 0);
 
+                Instantiate(prefabBread, vec, Quaternion.identity);
+                breadCount[3] = true;
 
             }
 
             if (Input.GetKeyUp(KeyCode.L))
             {
                 isParent_L = false;
-
+                GameObject.FindGameObjectWithTag("EquipPoint_L").GetComponent<RightLeg_L>().enabled = true;
+                breadCount[3] = false;
 
             }
             if (isParent_L)
             {
                 antmove.btn[5, 0] = 0;
             }
-            else if (!(isParent_L))
-            {
-                antmove.btn[5, 0] = 1;
 
-            }
             y -= Time.deltaTime;
             yield return null;
         }
