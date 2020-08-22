@@ -45,11 +45,6 @@ public class getScore : MonoBehaviour
             transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f);
             isAntUpSideDown++;
 
-            Player.isParent_A = false;
-            Player.isParent_S = false;
-            Player.isParent_K = false;
-            Player.isParent_L = false;
-
             for (int i = 0; i < 4; i++)
             {
                 if (GameObject.Find("ant").GetComponent<Player>().breadCount[i] == true)
