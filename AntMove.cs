@@ -5,14 +5,15 @@ using System.Collections.Generic;
 
 public class AntMove : MonoBehaviour
 {
-    // private Coroutine inputBtnRoutine;
+
+   
+    
     private Coroutine inputForwardRout;
-    //private Coroutine inputBackwardRout;
     private float inputLate = 0.03f;
 
 
     public int[,] btn = new int[6, 2];
-    int pre_move = 0;
+    public int pre_move = 0;
 
 
     [Header("Speed")]
@@ -30,6 +31,9 @@ public class AntMove : MonoBehaviour
     float horizontalAxis;
     float rotationalAxis;
 
+    /// <summary>
+    /// trigger catch
+    /// </summary>
     public int chk = 0;
     void OnTriggerEnter(Collider col)
     {
@@ -55,6 +59,9 @@ public class AntMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// trigger catch
+    /// </summary>
 
     void Awake()
     {
@@ -64,7 +71,7 @@ public class AntMove : MonoBehaviour
 
     void Update()
     {
-        //StartCoroutine(this.StartButton());
+       
         StartCoroutine(this.BtnState());
 
         StartCoroutine(this.Forward());
@@ -78,8 +85,6 @@ public class AntMove : MonoBehaviour
     {
         // verticalAxis = Input.GetAxis("Horizontal");
         // horizontalAxis = Input.GetAxis("Vertical");
-
-
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -321,7 +326,7 @@ public class AntMove : MonoBehaviour
 
 
             //d>j일때 j
-            if ((btn[2, 0] == 1 && btn[2, 1] >= btn[3, 1]) && (btn[0, 1] == 1 || btn[1, 1] == 1 || btn[4, 1] == 1 || btn[5, 1] == 1))
+            if ((btn[2, 0] == 1 && pre_move>=0) && (btn[0, 1] == 1 || btn[1, 1] == 1 || btn[4, 1] == 1 || btn[5, 1] == 1))
             {
                 if (Input.GetKeyDown(KeyCode.J))
                 {
@@ -332,7 +337,7 @@ public class AntMove : MonoBehaviour
             }
 
             //j<d일때 d
-            if ((btn[3, 0] == 1 && btn[2, 1] <= btn[3, 1]) && (btn[0, 1] == 1 || btn[1, 1] == 1 || btn[4, 1] == 1 || btn[5, 1] == 1))
+            if ((btn[3, 0] == 1 && pre_move<=0) && (btn[0, 1] == 1 || btn[1, 1] == 1 || btn[4, 1] == 1 || btn[5, 1] == 1))
             {
                 if (Input.GetKeyDown(KeyCode.D))
                 {
@@ -476,12 +481,10 @@ public class AntMove : MonoBehaviour
                 
 
             }
-            /*btn[2, 1] = 0;
-            btn[3, 1] = 0;
-            pre_move = 0;*/
+            
 
         }
-        else if (num >= 2)  //btn[2, 1] == 0 && btn[3, 1] == 0)
+        else if (num >= 2)  
         {
             horizontalAxis = 0f;
             transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
@@ -490,7 +493,7 @@ public class AntMove : MonoBehaviour
         if (transform.position.y < 0)
         {
 
-            transform.position = new Vector3((float)-11.95, 0, (float)5.24);
+            transform.position = new Vector3((float)-11.95, 0, (float)5.148);
             btn[2, 1] = 0;
             btn[3, 1] = 0;
             pre_move = 0;
