@@ -42,14 +42,22 @@ public class getScore : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && goalCollide && isAntUpSideDown % 2 == 1)   //누르는 동안 hold //바닥에 닿았을 때 //개미가 역방향일 때 -> 정방향
         {
+            Player.isParent_A = false;
+            Player.isParent_S = false;
+            Player.isParent_K = false;
+            Player.isParent_L = false;
+
             transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f);
             isAntUpSideDown++;
+
+            finalBread = 0;
 
             for (int i = 0; i < 4; i++)
             {
                 if (GameObject.Find("ant").GetComponent<Player>().breadCount[i] == true)
                 {
                     finalBread++;
+                    GameObject.Find("ant").GetComponent<Player>().breadCount[i] = false;
                 }
             }
             score.scoreValue += finalBread;
