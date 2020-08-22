@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class item : MonoBehaviour
 {
-    
+
     Transform breadEquipPoint;  //개미다리
 
-    public Rigidbody rb;
+    Rigidbody rb;
     bool isParent;
     //public bool isParent;
     int i = -1;
-     
+
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>(); //빵의 리지드바디 가져오기
-        
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_A").GetComponent<Transform>();
@@ -53,7 +53,6 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         decideParent();
     }
 
@@ -61,7 +60,7 @@ public class Item : MonoBehaviour
     {
         if (Player.start)
         {
-            if ((i==0) && !(Player.isParent_A))
+            if ((i == 0) && !(Player.isParent_A))
             {
                 Debug.Log("A키 떨어짐");
                 this.transform.parent = null;                    //상속해제
@@ -72,25 +71,25 @@ public class Item : MonoBehaviour
             {
                 Debug.Log("S키 떨어짐");
 
-                this.transform.parent = null;                   
-                this.rb.useGravity = true;                
-                this.rb.mass = 100;                             
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
             }
             else if ((i == 2) && !(Player.isParent_K))
             {
                 Debug.Log("K키 떨어짐");
 
-                this.transform.parent = null;                 
-                this.rb.useGravity = true;                
-                this.rb.mass = 100;                         
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
             }
             else if ((i == 3) && !(Player.isParent_L))
             {
                 Debug.Log("L키 떨어짐");
 
-                this.transform.parent = null;                    
-                this.rb.useGravity = true;                
-                this.rb.mass = 100;                               
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
             }
 
         }
@@ -101,8 +100,8 @@ public class Item : MonoBehaviour
     {
         //if (other.gameObject.tag == "Ground")
         //{
-            Debug.Log("충돌");
-            Destroy(this.gameObject);
+        Debug.Log("충돌");
+        Destroy(this.gameObject);
         //}
     }
 
