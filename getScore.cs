@@ -43,7 +43,7 @@ public class getScore : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && goalCollide && isAntUpSideDown % 2 == 1)   //누르는 동안 hold //바닥에 닿았을 때 //개미가 역방향일 때 -> 정방향
         {
             GameObject.Find("Canvas").GetComponent<PopupLoad>().chkSpace = false;
-        
+
             Player.isParent_A = false;
             Player.isParent_S = false;
             Player.isParent_K = false;
@@ -69,6 +69,7 @@ public class getScore : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && player.isPlayerEnter && isAntUpSideDown % 2 == 0) //식빵 닿았을 때 //개미가 정방향일 때 -> 역방향
         {
             transform.eulerAngles = new Vector3(0.0f, 270.0f, 270.0f);
+            transform.position = new Vector3(transform.position.x, 37.99f, transform.position.z);
             isAntUpSideDown++;
         }
 
