@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -472,8 +472,6 @@ public class AntMove : MonoBehaviour
 
     private IEnumerator FallDown()
     {
-
-
         float w = 0.0001f;
 
         float checkTime = 0.5f;
@@ -501,7 +499,7 @@ public class AntMove : MonoBehaviour
 
         //눌러진 버튼이 두개보다 적을때
         //다리가 두개 미만 붙어있을때
-        if (transform.position.y > startPoint && num < 2)
+        if (transform.position.y > startPoint && num < 2 && !telCheck)
         {
             RightLeg.transform.localScale = new Vector3(2.5f, 60, 2.5f);   //!!!!!!!!!!!!!!!!!!!
             LeftLeg.transform.localScale = new Vector3(2.5f, 60, 2.5f);    //!!!!!!!!!!!!!!!!!!!
@@ -513,7 +511,7 @@ public class AntMove : MonoBehaviour
             float time = 1f;
             float timeSpan = 0.0f;
 
-            if (getScore.isAntUpSideDown % 2 == 0 && !telCheck)
+            if (getScore.isAntUpSideDown % 2 == 0)
             {
                 while (time > 0)
                 {
@@ -545,16 +543,7 @@ public class AntMove : MonoBehaviour
 
                 }
             }
-            else if (telCheck)
-            {
-                Invoke("stop4moment", 0.8f); //1f
-                for (int i = 0; i < 6; i++)
-                {
-                    btn[i, 0] = 0;
-                }
-                telCheck = false;
-                getScore.isAntUpSideDown = 0;
-            }
+            
 
             for (int i = 0; i < 6; i++)
             {
@@ -564,8 +553,20 @@ public class AntMove : MonoBehaviour
 
         else if (num >= 2)  //btn[2, 1] == 0 && btn[3, 1] == 0)
         {
+            telCheck = false;
             horizontalAxis = 0f;
             transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
+        }
+
+        else if (num < 2 && telCheck)
+        {
+            Invoke("stop4moment", 0.8f); //1f
+            for (int i = 0; i < 6; i++)
+            {
+                btn[i, 0] = 0;
+            }
+            telCheck = false;
+            getScore.isAntUpSideDown = 0;
         }
 
         if (transform.position.y < startPoint) //
@@ -589,15 +590,16 @@ public class AntMove : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f); //개미정방향으로  
         transform.position = new Vector3(-11.95f, 36.00f, 5.24f);
 
+        GameObject.Find("Canvas").GetComponent<PopupLoad>().chkBread2 = true;
+
         telCheck = true;
+
         getScore.isAntUpSideDown = 0;
 
 
     }
     void stop4moment()
     {
-
-        //getScore.isAntUpSideDown = -1;
         for (int i = 2; i < 4; i++)
         {
             btn[i, 0] = 1;
