@@ -17,6 +17,8 @@ public class ChangeScene : MonoBehaviour
 
     public void StartMainChange()
     {
+        getScore.isAntUpSideDown = 0;
+        score.scoreValue = 0;
         SceneManager.LoadScene("Main");
     }
 
