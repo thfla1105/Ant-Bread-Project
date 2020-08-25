@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinAntMove : MonoBehaviour
+public class SpacePmove : MonoBehaviour
 {
-    GameObject ht;
+    GameObject ht, ant;
+    AntMove antmove;
 
     float time;
     public float blinkTime = 0.5f;
 
     void Awake()
     {
-        ht = GameObject.Find("SpinAntImage2");
+        ht = GameObject.Find("SpaceImage2");
+        ant = GameObject.Find("ant");
+        antmove = ant.GetComponent<AntMove>();
     }
     // Start is called before the first frame update
     void Start()
@@ -39,8 +42,7 @@ public class SpinAntMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject.Find("Canvas").GetComponent<PopupLoad>().chkSpin = false;
-            GameObject.Find("Canvas").GetComponent<PopupLoad>().chkSpace = true;
+            GameObject.Find("Canvas").GetComponent<PopupLoad>().chkBread = true;
             gameObject.SetActive(false);
             ht.SetActive(false);
         }

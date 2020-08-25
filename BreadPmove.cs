@@ -19,6 +19,7 @@ public class BreadPmove : MonoBehaviour
         if (Player.isParent_A || Player.isParent_K || Player.isParent_L || Player.isParent_S)
         {
             GameObject.Find("Canvas").GetComponent<PopupLoad>().chkBread = false;
+            GameObject.Find("Canvas").GetComponent<PopupLoad>().chkSpin = true;
             gameObject.SetActive(false);
         }
         

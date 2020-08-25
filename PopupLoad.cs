@@ -35,7 +35,11 @@ public class PopupLoad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((!chkBread2) && score.scoreValue == 0)
+        if (!chkSpin && chkSpace) chkBread2 = true;
+
+        else chkBread2 = false;
+
+        if ((!chkBread2) && getScore.isAntUpSideDown % 2 == 0)
         {
             if (player.isPlayerEnter && !Player.isParent_A && !Player.isParent_K && !Player.isParent_L && !Player.isParent_S)
             {
@@ -47,7 +51,7 @@ public class PopupLoad : MonoBehaviour
             }
         }
 
-        if (chkBread2 && getScore.isAntUpSideDown % 2 == 0 && score.scoreValue == 0)
+        if (chkBread2 && getScore.isAntUpSideDown % 2 == 0)
         {
             if (player.isPlayerEnter && !Player.isParent_A && !Player.isParent_K && !Player.isParent_L && !Player.isParent_S)
             {
@@ -59,7 +63,7 @@ public class PopupLoad : MonoBehaviour
             }
         }
 
-        if (score.scoreValue == 0 && getScore.isAntUpSideDown % 2 == 0)
+        if (getScore.isAntUpSideDown % 2 == 0)
         {
             if ((Player.isParent_A || Player.isParent_K || Player.isParent_L || Player.isParent_S) && player.isPlayerEnter)
             {
@@ -72,9 +76,9 @@ public class PopupLoad : MonoBehaviour
             }
         }
      
-        if (score.scoreValue == 0)
+        if (ant.transform.eulerAngles.y == 270.0f)
         {
-            if (ant.transform.eulerAngles.y == 270.0f && ant.transform.position.y == -7.0f)
+            if (ant.transform.position.y == -7.0f)
             {
                 SpacePopup.SetActive(true);
             }
