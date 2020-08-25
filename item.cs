@@ -1,0 +1,108 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class item : MonoBehaviour
+{
+
+    Transform breadEquipPoint;  //개미다리
+
+    Rigidbody rb;
+    bool isParent;
+    //public bool isParent;
+    int i = -1;
+
+    void Awake()
+    {
+        rb = gameObject.GetComponent<Rigidbody>(); //빵의 리지드바디 가져오기
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_A").GetComponent<Transform>();
+            i = 0;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_S").GetComponent<Transform>();
+            i = 1;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_K").GetComponent<Transform>();
+            i = 2;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            breadEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint_L").GetComponent<Transform>();
+            i = 3;
+
+        }
+        transform.eulerAngles = new Vector3(0.0f, 90.0f, 270.0f); //회전각도
+        transform.parent = breadEquipPoint;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        decideParent();
+    }
+
+    void decideParent()
+    {
+        if (Player.start)
+        {
+            if ((i == 0) && !(Player.isParent_A))
+            {
+                Debug.Log("A키 떨어짐");
+                this.transform.parent = null;                    //상속해제
+                this.rb.useGravity = true;                //빵에 중력설정해서 바닥으로 떨구기
+                this.rb.mass = 100;                               //빵의 질량 100으로 설정 
+            }
+            else if ((i == 1) && !(Player.isParent_S))
+            {
+                Debug.Log("S키 떨어짐");
+
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
+            }
+            else if ((i == 2) && !(Player.isParent_K))
+            {
+                Debug.Log("K키 떨어짐");
+
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
+            }
+            else if ((i == 3) && !(Player.isParent_L))
+            {
+                Debug.Log("L키 떨어짐");
+
+                this.transform.parent = null;
+                this.rb.useGravity = true;
+                this.rb.mass = 100;
+            }
+
+        }
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            Debug.Log("충돌");
+            Destroy(this.gameObject);
+        }
+    }
+
+}
