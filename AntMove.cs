@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,9 +8,9 @@ public class AntMove : MonoBehaviour
     GameObject LeftLeg;  //앞다리 오브젝트 호출
     GameObject RightLeg;
 
-    // private Coroutine inputBtnRoutine;
+    
     private Coroutine inputForwardRout;
-    //private Coroutine inputBackwardRout;
+   
     private float inputLate = 0.03f;
 
 
@@ -22,12 +22,6 @@ public class AntMove : MonoBehaviour
     public float speedMovement = 0.5f;
     public float speedRotation = 30f;
     public float speedAnimation = 3f;
-
-
-    [Header("Inverse Kinematics")]
-    public bool isIKEnabled = true;
-    public float IKFactor = 20f;
-    float IKAngle = 0f;
 
     float verticalAxis;
     float horizontalAxis;
@@ -65,48 +59,21 @@ public class AntMove : MonoBehaviour
     {
         LeftLeg = GameObject.Find("L1.001");  //앞다리 오브젝트 호출
         RightLeg = GameObject.Find("R1.001");
-        //this.gameObject.transform.position = new Vector3(transform.position.x, startPoint, transform.position.z); //개미 처음시작
+        
     }
 
 
     void Update()
     {
-        //StartCoroutine(this.StartButton());
+        
         StartCoroutine(this.BtnState());
 
         StartCoroutine(this.Forward());
         StartCoroutine(this.FallDown());
-        AxesUpdate();
+      
 
 
     }
-
-    void AxesUpdate()
-    {
-        // verticalAxis = Input.GetAxis("Horizontal");
-        // horizontalAxis = Input.GetAxis("Vertical");
-
-
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            rotationalAxis = -1f;
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            rotationalAxis = 1f;
-        }
-        else
-        {
-            rotationalAxis = 0f;
-        }
-
-        transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
-        transform.rotation *= Quaternion.Euler(Vector3.up * rotationalAxis * Time.deltaTime * speedRotation);
-        Debug.Log(transform.eulerAngles);
-    }
-
-
 
 
     private IEnumerator BtnState()
@@ -275,7 +242,7 @@ public class AntMove : MonoBehaviour
 
         }
 
-
+        
         yield return null;
 
     }
@@ -543,7 +510,7 @@ public class AntMove : MonoBehaviour
 
                 }
             }
-            
+
 
             for (int i = 0; i < 6; i++)
             {
@@ -578,7 +545,7 @@ public class AntMove : MonoBehaviour
 
         }
 
-        //this.inputBackwardRout = null;
+        
         yield return null;
     }
 
@@ -590,7 +557,7 @@ public class AntMove : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f); //개미정방향으로  
         transform.position = new Vector3(-11.95f, 36.00f, 5.24f);
 
-        GameObject.Find("Canvas").GetComponent<PopupLoad>().chkBread2 = true;
+        
 
         telCheck = true;
 
