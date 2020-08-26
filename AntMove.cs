@@ -8,9 +8,9 @@ public class AntMove : MonoBehaviour
     GameObject LeftLeg;  //앞다리 오브젝트 호출
     GameObject RightLeg;
 
-    
+
     private Coroutine inputForwardRout;
-   
+
     private float inputLate = 0.03f;
 
 
@@ -59,18 +59,18 @@ public class AntMove : MonoBehaviour
     {
         LeftLeg = GameObject.Find("L1.001");  //앞다리 오브젝트 호출
         RightLeg = GameObject.Find("R1.001");
-        
+
     }
 
 
     void Update()
     {
-        
+
         StartCoroutine(this.BtnState());
 
         StartCoroutine(this.Forward());
         StartCoroutine(this.FallDown());
-      
+
 
 
     }
@@ -242,7 +242,7 @@ public class AntMove : MonoBehaviour
 
         }
 
-        
+
         yield return null;
 
     }
@@ -472,6 +472,9 @@ public class AntMove : MonoBehaviour
             LeftLeg.transform.localScale = new Vector3(2.5f, 60, 2.5f);    //!!!!!!!!!!!!!!!!!!!
 
             Debug.Log("falling down");
+
+            SoundManager.PlaySound("falling");  
+
             btn[2, 1] = 0; //D키가 뻗어져있는걸로 변경
             btn[3, 1] = 0; //J키가 뻗어져있는걸로 변경
             pre_move = 0;
@@ -486,6 +489,7 @@ public class AntMove : MonoBehaviour
                     transform.position += (transform.forward * verticalAxis + transform.right * horizontalAxis) * Time.deltaTime * speedMovement;
                     time -= Time.deltaTime;
 
+                    SoundManager.PlaySound("falling");
 
                 }
             }
@@ -503,6 +507,11 @@ public class AntMove : MonoBehaviour
 
                     if (timeSpan > checkTime)
                     {
+                        Player.isParent_A = false;
+                        Player.isParent_S = false;
+                        Player.isParent_K = false;
+                        Player.isParent_L = false;
+
                         Invoke("teleport", 0.5f); //0.5
                         break;
                     }
@@ -545,7 +554,7 @@ public class AntMove : MonoBehaviour
 
         }
 
-        
+
         yield return null;
     }
 
@@ -557,7 +566,7 @@ public class AntMove : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, 90.0f, 90.0f); //개미정방향으로  
         transform.position = new Vector3(-11.95f, 36.00f, 5.24f);
 
-        
+
 
         telCheck = true;
 
