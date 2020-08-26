@@ -20,6 +20,17 @@ public class ChangeScene : MonoBehaviour
         getScore.isAntUpSideDown = 0;
         score.scoreValue = 0;
         SceneManager.LoadScene("Main");
+        Player.isParent_A = false;
+        Player.isParent_K = false;
+        Player.isParent_L = false;
+        Player.isParent_S = false;
+        Player.start = false;
+
+    }
+    
+    public void TutorialLoad()
+    {
+        SceneManager.LoadScene("TutorialScene");
     }
 
     public void MenuLoad()
@@ -40,7 +51,7 @@ public class ChangeScene : MonoBehaviour
         Vector3 creatingpoint = canvas.transform.localPosition;
         Instantiate(prefabMenu, creatingpoint, Quaternion.identity);
         menu.SetActive(false);
-        
+
     }
 
     public void MenuDelete()
@@ -64,6 +75,6 @@ public class ChangeScene : MonoBehaviour
 
     public void StartLoad()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene("Opening");
     }
 }
