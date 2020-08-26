@@ -11,7 +11,7 @@ public class AntMove : MonoBehaviour
 
     private Coroutine inputForwardRout;
 
-    private float inputLate = 0.03f;
+    private float inputLate = 0.01f;
 
 
     public int[,] btn = new int[6, 2];
@@ -473,7 +473,7 @@ public class AntMove : MonoBehaviour
 
             Debug.Log("falling down");
 
-            SoundManager.PlaySound("falling");  
+            SoundManager.PlaySound("falling");
 
             btn[2, 1] = 0; //D키가 뻗어져있는걸로 변경
             btn[3, 1] = 0; //J키가 뻗어져있는걸로 변경
